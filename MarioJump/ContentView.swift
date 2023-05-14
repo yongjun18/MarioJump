@@ -18,7 +18,7 @@ struct AnimationConst {
     }
     struct Coin {
         public static let initY = -350.0
-        public static let maxY = -500.0
+        public static let maxY = -600.0
     }
 }
 
@@ -73,12 +73,12 @@ struct ContentView: View {
     
     // 애니메이션 실행
     private func animate() {
-        let hitBoxTime = 0.3
-        let marioStopTime = 0.5
+        let hitBoxTime = 0.20
+        let marioStopTime = 0.37
         
-        let boxDropTime = 0.55
+        let boxDropTime = 0.30
         let boxStopTime = boxDropTime + (boxDropTime - hitBoxTime)
-        let coinDropTime = 0.60
+        let coinDropTime = 0.40
         let coinStopTime = coinDropTime + (coinDropTime - hitBoxTime)
          
         // 마리오 점프 시작
