@@ -8,6 +8,11 @@
 import SwiftUI
 
 struct ContentView: View {
+    private var animating = false
+    @State private var marioY = -145.0
+    @State private var boxY = -350.0
+    @State private var coinY = -350.0
+    
     var body: some View {
         ZStack {
             // 배경 이미지 설정
@@ -17,29 +22,24 @@ struct ContentView: View {
             }
             
             ZStack {
-                Image("mario")
+                Image(animating ? "mario-jump" : "mario")
                     .resizable()
                     .scaledToFit()
                     .frame(width: 100, height: 100)
-                    .offset(y: -145)
-                
-                Image("mario-jump")
-                    .resizable()
-                    .scaledToFit()
-                    .frame(width: 100, height: 100)
-                    .offset(y: -270)
-                
-                Image("mario-box")
-                    .resizable()
-                    .scaledToFit()
-                    .frame(width: 70, height: 70)
-                    .offset(y: -350)
+                    .offset(y: marioY)
                 
                 Image("mario-coin")
                     .resizable()
                     .scaledToFit()
                     .frame(width: 70, height: 70)
-                    .offset(y: -450)
+                    .offset(y: coinY)
+                
+                Image("mario-box")
+                    .resizable()
+                    .scaledToFit()
+                    .frame(width: 70, height: 70)
+                    .offset(y: boxY)
+                
             }
             .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .bottom)
         }
@@ -49,6 +49,22 @@ struct ContentView: View {
         .onTapGesture {
             print("tapped")
         }
+    }
+    
+    // 애니메이션 실행
+    private func animate() {
+        let hitBoxTime = 0.3
+        let marioStopTime = 0.5
+        
+        let boxDroppingTime = 0.45
+        let boxStopTime = boxDroppingTime + (boxDroppingTime - hitBoxTime)
+        let coinDroppingTime = 0.48
+        let coinStopTime = coinDroppingTime + (coinDroppingTime - hitBoxTime)
+        
+        let maxMarioY = -270
+        let maxBoxY = -400
+        let maxCoinY = -500
+        
     }
 }
 
