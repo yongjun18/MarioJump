@@ -15,6 +15,22 @@ struct ContentView: View {
                 Image("bg-image")
             }
             .ignoresSafeArea()
+            
+            Image("mario-jump")
+                .resizable()
+                .scaledToFit()
+                .frame(width: 100, height: 100)
+            
+            Image("mario")
+                .resizable()
+                .scaledToFit()
+                .frame(width: 100, height: 100)
+            
+            Image("mario-box")
+                .resizable()
+                .scaledToFit()
+                .frame(width: 70, height: 70)
+                
         }
     }
 }
