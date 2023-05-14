@@ -10,6 +10,7 @@ import SwiftUI
 struct ContentView: View {
     var body: some View {
         ZStack {
+            // 배경 이미지 설정
             VStack(spacing: 0) {
                 Color(red: 107/255, green: 141/255, blue: 255/255)
                 Image("bg-image")
@@ -43,6 +44,11 @@ struct ContentView: View {
             .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .bottom)
         }
         .ignoresSafeArea()
+        // 화면 전체에서 터치 이벤트 받기
+        .contentShape(Rectangle())
+        .onTapGesture {
+            print("tapped")
+        }
     }
 }
 
