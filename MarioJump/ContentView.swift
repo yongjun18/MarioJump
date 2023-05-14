@@ -76,9 +76,9 @@ struct ContentView: View {
         let hitBoxTime = 0.3
         let marioStopTime = 0.5
         
-        let boxDropTime = 0.45
+        let boxDropTime = 0.55
         let boxStopTime = boxDropTime + (boxDropTime - hitBoxTime)
-        let coinDropTime = 0.48
+        let coinDropTime = 0.60
         let coinStopTime = coinDropTime + (coinDropTime - hitBoxTime)
          
         // 마리오 점프 시작
@@ -96,6 +96,32 @@ struct ContentView: View {
         // 마리오 착지
         DispatchQueue.main.asyncAfter(deadline: .now() + marioStopTime) {
             marioAnimating = false
+        }
+        
+        // 박스 점프 시작
+        withAnimation(
+            Animation.easeOut(duration: boxDropTime - hitBoxTime)
+                .delay(hitBoxTime)) {
+                    boxY = AnimationConst.Box.maxY
+        }
+        // 박스 하강 시작
+        withAnimation(
+            Animation.easeIn(duration: boxStopTime - boxDropTime)
+                .delay(boxDropTime)) {
+                    boxY = AnimationConst.Box.initY
+        }
+        
+        // 코인 점프 시작
+        withAnimation(
+            Animation.easeOut(duration: coinDropTime - hitBoxTime)
+                .delay(hitBoxTime)) {
+                    coinY = AnimationConst.Coin.maxY
+        }
+        // 코인 하강 시작
+        withAnimation(
+            Animation.easeIn(duration: coinStopTime - coinDropTime)
+                .delay(coinDropTime)) {
+                    coinY = AnimationConst.Coin.initY
         }
         
         // 최종 애니메이션 종료
