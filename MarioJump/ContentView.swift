@@ -14,7 +14,6 @@ struct ContentView: View {
                 Color(red: 107/255, green: 141/255, blue: 255/255)
                 Image("bg-image")
             }
-            .ignoresSafeArea()
             
             Image("mario-jump")
                 .resizable()
@@ -32,6 +31,7 @@ struct ContentView: View {
                 .frame(width: 70, height: 70)
                 
         }
+        .ignoresSafeArea()
     }
 }
 
