@@ -15,21 +15,32 @@ struct ContentView: View {
                 Image("bg-image")
             }
             
-            Image("mario-jump")
-                .resizable()
-                .scaledToFit()
-                .frame(width: 100, height: 100)
-            
-            Image("mario")
-                .resizable()
-                .scaledToFit()
-                .frame(width: 100, height: 100)
-            
-            Image("mario-box")
-                .resizable()
-                .scaledToFit()
-                .frame(width: 70, height: 70)
+            ZStack {
+                Image("mario")
+                    .resizable()
+                    .scaledToFit()
+                    .frame(width: 100, height: 100)
+                    .offset(y: -145)
                 
+                Image("mario-jump")
+                    .resizable()
+                    .scaledToFit()
+                    .frame(width: 100, height: 100)
+                    .offset(y: -270)
+                
+                Image("mario-box")
+                    .resizable()
+                    .scaledToFit()
+                    .frame(width: 70, height: 70)
+                    .offset(y: -350)
+                
+                Image("mario-coin")
+                    .resizable()
+                    .scaledToFit()
+                    .frame(width: 70, height: 70)
+                    .offset(y: -450)
+            }
+            .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .bottom)
         }
         .ignoresSafeArea()
     }
