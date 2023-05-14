@@ -23,6 +23,7 @@ struct AnimationConst {
 }
 
 struct ContentView: View {
+    @State private var coinCnt = 0
     @State private var animating = false
     @State private var marioAnimating = false
     @State private var marioY = AnimationConst.Mario.initY
@@ -31,42 +32,62 @@ struct ContentView: View {
     
     var body: some View {
         ZStack {
-            // 배경 이미지 설정
-            VStack(spacing: 0) {
-                Color(red: 107/255, green: 141/255, blue: 255/255)
-                Image("bg-image")
+            ZStack {
+                // 배경 이미지 설정
+                VStack(spacing: 0) {
+                    Color(red: 107/255, green: 141/255, blue: 255/255)
+                    Image("bg-image")
+                }
+                
+                ZStack {
+                    Image(marioAnimating ? "mario-jump" : "mario")
+                        .resizable()
+                        .scaledToFit()
+                        .frame(width: 100, height: 100)
+                        .offset(y: marioY)
+                    
+                    Image("mario-coin")
+                        .resizable()
+                        .scaledToFit()
+                        .frame(width: 70, height: 70)
+                        .offset(y: coinY)
+                    
+                    Image("mario-box")
+                        .resizable()
+                        .scaledToFit()
+                        .frame(width: 70, height: 70)
+                        .offset(y: boxY)
+                    
+                }
+                .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .bottom)
+            }
+            .ignoresSafeArea()
+            // 화면 전체에서 터치 이벤트 받기
+            .contentShape(Rectangle())
+            .onTapGesture {
+                if animating == false {
+                    marioAnimating = true
+                    animating = true
+                    animate()
+                }
             }
             
-            ZStack {
-                Image(marioAnimating ? "mario-jump" : "mario")
-                    .resizable()
-                    .scaledToFit()
-                    .frame(width: 100, height: 100)
-                    .offset(y: marioY)
-                
-                Image("mario-coin")
-                    .resizable()
-                    .scaledToFit()
-                    .frame(width: 70, height: 70)
-                    .offset(y: coinY)
-                
-                Image("mario-box")
-                    .resizable()
-                    .scaledToFit()
-                    .frame(width: 70, height: 70)
-                    .offset(y: boxY)
-                
-            }
-            .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .bottom)
-        }
-        .ignoresSafeArea()
-        // 화면 전체에서 터치 이벤트 받기
-        .contentShape(Rectangle())
-        .onTapGesture {
-            if animating == false {
-                marioAnimating = true
-                animating = true
-                animate()
+            // 상단 코인 count 미터기
+            VStack {
+                HStack(spacing: 0) {
+                    Image("mario-coin")
+                        .resizable()
+                        .scaledToFit()
+                        .frame(width: 35, height: 35)
+                        .padding([.leading], 10)
+                    Text("X \(coinCnt)")
+                        .font(.system(size: 25, weight: .bold))
+                        .foregroundColor(.white)
+                    Spacer()
+                }
+                .frame(width: UIScreen.main.bounds.width)
+                .padding([.top, .bottom], 10)
+                Spacer()
             }
         }
     }
@@ -111,6 +132,10 @@ struct ContentView: View {
                     boxY = AnimationConst.Box.initY
         }
         
+        // 코인 카운트 증가
+        DispatchQueue.main.asyncAfter(deadline: .now() + hitBoxTime) {
+            coinCnt += 1
+        }
         // 코인 점프 시작
         withAnimation(
             Animation.easeOut(duration: coinDropTime - hitBoxTime)
