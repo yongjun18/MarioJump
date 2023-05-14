@@ -7,11 +7,27 @@
 
 import SwiftUI
 
+struct AnimationConst {
+    struct Mario {
+        public static let initY = -145.0
+        public static let maxY = -270.0
+    }
+    struct Box {
+        public static let initY = -350.0
+        public static let maxY = -400.0
+    }
+    struct Coin {
+        public static let initY = -350.0
+        public static let maxY = -500.0
+    }
+}
+
 struct ContentView: View {
-    private var animating = false
-    @State private var marioY = -145.0
-    @State private var boxY = -350.0
-    @State private var coinY = -350.0
+    @State private var animating = false
+    @State private var marioAnimating = false
+    @State private var marioY = AnimationConst.Mario.initY
+    @State private var boxY = AnimationConst.Box.initY
+    @State private var coinY = AnimationConst.Coin.initY
     
     var body: some View {
         ZStack {
@@ -22,7 +38,7 @@ struct ContentView: View {
             }
             
             ZStack {
-                Image(animating ? "mario-jump" : "mario")
+                Image(marioAnimating ? "mario-jump" : "mario")
                     .resizable()
                     .scaledToFit()
                     .frame(width: 100, height: 100)
@@ -47,7 +63,11 @@ struct ContentView: View {
         // 화면 전체에서 터치 이벤트 받기
         .contentShape(Rectangle())
         .onTapGesture {
-            print("tapped")
+            if animating == false {
+                marioAnimating = true
+                animating = true
+                animate()
+            }
         }
     }
     
@@ -56,15 +76,33 @@ struct ContentView: View {
         let hitBoxTime = 0.3
         let marioStopTime = 0.5
         
-        let boxDroppingTime = 0.45
-        let boxStopTime = boxDroppingTime + (boxDroppingTime - hitBoxTime)
-        let coinDroppingTime = 0.48
-        let coinStopTime = coinDroppingTime + (coinDroppingTime - hitBoxTime)
+        let boxDropTime = 0.45
+        let boxStopTime = boxDropTime + (boxDropTime - hitBoxTime)
+        let coinDropTime = 0.48
+        let coinStopTime = coinDropTime + (coinDropTime - hitBoxTime)
+         
+        // 마리오 점프 시작
+        withAnimation(
+            Animation.easeOut(duration: hitBoxTime)
+                .delay(0)) {
+                    marioY = AnimationConst.Mario.maxY
+        }
+        // 마리오 하강 시작
+        withAnimation(
+            Animation.easeIn(duration: marioStopTime - hitBoxTime)
+                .delay(hitBoxTime)) {
+                    marioY = AnimationConst.Mario.initY
+        }
+        // 마리오 착지
+        DispatchQueue.main.asyncAfter(deadline: .now() + marioStopTime) {
+            marioAnimating = false
+        }
         
-        let maxMarioY = -270
-        let maxBoxY = -400
-        let maxCoinY = -500
-        
+        // 최종 애니메이션 종료
+        DispatchQueue.main.asyncAfter(deadline: .now() + coinStopTime) {
+            animating = false
+        }
+
     }
 }
 
