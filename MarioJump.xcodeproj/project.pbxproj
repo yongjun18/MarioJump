@@ -9,12 +9,12 @@
 /* Begin PBXBuildFile section */
 		03DFA58884D0AD01D40DCD1B /* Pods_MarioJump.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8B5E0C1F07FD3014674F4CCA /* Pods_MarioJump.framework */; };
 		D05C78832A10968F00267863 /* MarioJumpApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = D05C78822A10968F00267863 /* MarioJumpApp.swift */; };
-		D05C78852A10968F00267863 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D05C78842A10968F00267863 /* ContentView.swift */; };
 		D05C78872A10969000267863 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = D05C78862A10969000267863 /* Assets.xcassets */; };
 		D05C788A2A10969000267863 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = D05C78892A10969000267863 /* Preview Assets.xcassets */; };
 		D09CE3772A12575E009C9134 /* DungGeunMo.otf in Resources */ = {isa = PBXBuildFile; fileRef = D09CE3762A12575E009C9134 /* DungGeunMo.otf */; };
 		D0AAFEAF2A1A164F005829FB /* GameView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0AAFEAE2A1A164F005829FB /* GameView.swift */; };
 		D0AAFEB22A1A16C6005829FB /* GameViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0AAFEB12A1A16C6005829FB /* GameViewModel.swift */; };
+		D0AAFEB52A1A1925005829FB /* GameModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0AAFEB42A1A1925005829FB /* GameModel.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -23,13 +23,13 @@
 		A23A4491539E1EB0D0F1A45F /* Pods-MarioJump.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-MarioJump.release.xcconfig"; path = "Target Support Files/Pods-MarioJump/Pods-MarioJump.release.xcconfig"; sourceTree = "<group>"; };
 		D05C787F2A10968F00267863 /* MarioJump.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = MarioJump.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		D05C78822A10968F00267863 /* MarioJumpApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MarioJumpApp.swift; sourceTree = "<group>"; };
-		D05C78842A10968F00267863 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
 		D05C78862A10969000267863 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		D05C78892A10969000267863 /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
 		D09CE3762A12575E009C9134 /* DungGeunMo.otf */ = {isa = PBXFileReference; lastKnownFileType = file; name = DungGeunMo.otf; path = ../../../../../Downloads/DungGeunMo.otf; sourceTree = "<group>"; };
 		D09CE3782A1258D5009C9134 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
 		D0AAFEAE2A1A164F005829FB /* GameView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameView.swift; sourceTree = "<group>"; };
 		D0AAFEB12A1A16C6005829FB /* GameViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameViewModel.swift; sourceTree = "<group>"; };
+		D0AAFEB42A1A1925005829FB /* GameModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameModel.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -82,12 +82,12 @@
 		D05C78812A10968F00267863 /* MarioJump */ = {
 			isa = PBXGroup;
 			children = (
+				D0AAFEB32A1A1918005829FB /* Model */,
 				D0AAFEB02A1A16B1005829FB /* ViewModel */,
 				D0AAFEAD2A1A1634005829FB /* View */,
 				D09CE3782A1258D5009C9134 /* Info.plist */,
 				D09CE3752A125736009C9134 /* font */,
 				D05C78822A10968F00267863 /* MarioJumpApp.swift */,
-				D05C78842A10968F00267863 /* ContentView.swift */,
 				D05C78862A10969000267863 /* Assets.xcassets */,
 				D05C78882A10969000267863 /* Preview Content */,
 			);
@@ -124,6 +124,14 @@
 				D0AAFEB12A1A16C6005829FB /* GameViewModel.swift */,
 			);
 			path = ViewModel;
+			sourceTree = "<group>";
+		};
+		D0AAFEB32A1A1918005829FB /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				D0AAFEB42A1A1925005829FB /* GameModel.swift */,
+			);
+			path = Model;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -241,8 +249,8 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				D0AAFEB52A1A1925005829FB /* GameModel.swift in Sources */,
 				D0AAFEB22A1A16C6005829FB /* GameViewModel.swift in Sources */,
-				D05C78852A10968F00267863 /* ContentView.swift in Sources */,
 				D0AAFEAF2A1A164F005829FB /* GameView.swift in Sources */,
 				D05C78832A10968F00267863 /* MarioJumpApp.swift in Sources */,
 			);

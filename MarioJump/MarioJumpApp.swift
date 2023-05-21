@@ -11,7 +11,7 @@ import SwiftUI
 struct MarioJumpApp: App {
     var body: some Scene {
         WindowGroup {
-            ContentView().environmentObject(GameViewModel())
+            GameView().environmentObject(GameViewModel())
         }
     }
 }
