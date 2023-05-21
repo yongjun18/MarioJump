@@ -35,9 +35,10 @@ struct ContentView: View {
             ZStack {
                 // 배경 이미지 설정
                 VStack(spacing: 0) {
-                    Color(red: 107/255, green: 141/255, blue: 255/255)
+                    Spacer()
                     Image("bg-image")
                 }
+                .background(Color(red: 107/255, green: 141/255, blue: 255/255))
                 
                 ZStack {
                     Image(marioAnimating ? "mario-jump" : "mario")
