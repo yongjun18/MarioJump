@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		03DFA58884D0AD01D40DCD1B /* Pods_MarioJump.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8B5E0C1F07FD3014674F4CCA /* Pods_MarioJump.framework */; };
 		D05C78832A10968F00267863 /* MarioJumpApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = D05C78822A10968F00267863 /* MarioJumpApp.swift */; };
 		D05C78852A10968F00267863 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D05C78842A10968F00267863 /* ContentView.swift */; };
 		D05C78872A10969000267863 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = D05C78862A10969000267863 /* Assets.xcassets */; };
@@ -15,6 +16,9 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		4AB964B0CD2C6A1369EE69F2 /* Pods-MarioJump.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-MarioJump.debug.xcconfig"; path = "Target Support Files/Pods-MarioJump/Pods-MarioJump.debug.xcconfig"; sourceTree = "<group>"; };
+		8B5E0C1F07FD3014674F4CCA /* Pods_MarioJump.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_MarioJump.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		A23A4491539E1EB0D0F1A45F /* Pods-MarioJump.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-MarioJump.release.xcconfig"; path = "Target Support Files/Pods-MarioJump/Pods-MarioJump.release.xcconfig"; sourceTree = "<group>"; };
 		D05C787F2A10968F00267863 /* MarioJump.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = MarioJump.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		D05C78822A10968F00267863 /* MarioJumpApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MarioJumpApp.swift; sourceTree = "<group>"; };
 		D05C78842A10968F00267863 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
@@ -29,17 +33,38 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				03DFA58884D0AD01D40DCD1B /* Pods_MarioJump.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		051C8334C71A713025176C82 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				8B5E0C1F07FD3014674F4CCA /* Pods_MarioJump.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		91BE76DD5729939520DBB8CF /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				4AB964B0CD2C6A1369EE69F2 /* Pods-MarioJump.debug.xcconfig */,
+				A23A4491539E1EB0D0F1A45F /* Pods-MarioJump.release.xcconfig */,
+			);
+			name = Pods;
+			path = Pods;
+			sourceTree = "<group>";
+		};
 		D05C78762A10968F00267863 = {
 			isa = PBXGroup;
 			children = (
 				D05C78812A10968F00267863 /* MarioJump */,
 				D05C78802A10968F00267863 /* Products */,
+				91BE76DD5729939520DBB8CF /* Pods */,
+				051C8334C71A713025176C82 /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -87,9 +112,11 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = D05C788D2A10969000267863 /* Build configuration list for PBXNativeTarget "MarioJump" */;
 			buildPhases = (
+				0B08EBB5E58CF9F218A9FCE4 /* [CP] Check Pods Manifest.lock */,
 				D05C787B2A10968F00267863 /* Sources */,
 				D05C787C2A10968F00267863 /* Frameworks */,
 				D05C787D2A10968F00267863 /* Resources */,
+				43F2272931F8745D17AD4B79 /* [CP] Embed Pods Frameworks */,
 			);
 			buildRules = (
 			);
@@ -145,6 +172,48 @@
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXResourcesBuildPhase section */
+
+/* Begin PBXShellScriptBuildPhase section */
+		0B08EBB5E58CF9F218A9FCE4 /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-MarioJump-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
+		43F2272931F8745D17AD4B79 /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-MarioJump/Pods-MarioJump-frameworks-${CONFIGURATION}-input-files.xcfilelist",
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-MarioJump/Pods-MarioJump-frameworks-${CONFIGURATION}-output-files.xcfilelist",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-MarioJump/Pods-MarioJump-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+/* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
 		D05C787B2A10968F00267863 /* Sources */ = {
@@ -275,6 +344,7 @@
 		};
 		D05C788E2A10969000267863 /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 4AB964B0CD2C6A1369EE69F2 /* Pods-MarioJump.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
@@ -307,6 +377,7 @@
 		};
 		D05C788F2A10969000267863 /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = A23A4491539E1EB0D0F1A45F /* Pods-MarioJump.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
