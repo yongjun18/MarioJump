@@ -23,12 +23,7 @@ struct AnimationConst {
 }
 
 struct ContentView: View {
-    @State private var coinCnt = 0
-    @State private var animating = false
-    @State private var marioAnimating = false
-    @State private var marioY = AnimationConst.Mario.initY
-    @State private var boxY = AnimationConst.Box.initY
-    @State private var coinY = AnimationConst.Coin.initY
+    @EnvironmentObject var gameVM: GameViewModel
     
     var body: some View {
         ZStack {
@@ -41,23 +36,23 @@ struct ContentView: View {
                 .background(Color(red: 107/255, green: 141/255, blue: 255/255))
                 
                 ZStack {
-                    Image(marioAnimating ? "mario-jump" : "mario")
+                    Image(gameVM.marioAnimating ? "mario-jump" : "mario")
                         .resizable()
                         .scaledToFit()
                         .frame(width: 100, height: 100)
-                        .offset(y: marioY)
+                        .offset(y: gameVM.marioY)
                     
                     Image("mario-coin")
                         .resizable()
                         .scaledToFit()
                         .frame(width: 70, height: 70)
-                        .offset(y: coinY)
+                        .offset(y: gameVM.coinY)
                     
                     Image("mario-box")
                         .resizable()
                         .scaledToFit()
                         .frame(width: 70, height: 70)
-                        .offset(y: boxY)
+                        .offset(y: gameVM.boxY)
                     
                 }
                 .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .bottom)
@@ -66,9 +61,9 @@ struct ContentView: View {
             // 화면 전체에서 터치 이벤트 받기
             .contentShape(Rectangle())
             .onTapGesture {
-                if animating == false {
-                    marioAnimating = true
-                    animating = true
+                if gameVM.animating == false {
+                    gameVM.marioAnimating = true
+                    gameVM.animating = true
                     animate()
                 }
             }
@@ -85,7 +80,7 @@ struct ContentView: View {
                         .font(.custom("DungGeunMo", size: 35))
                         .foregroundColor(.white)
                         .padding([.trailing], 5)
-                    Text("\(coinCnt)")
+                    Text("\(gameVM.coinCnt)")
                         .font(.custom("DungGeunMo", size: 35))
                         .foregroundColor(.white)
                     Spacer()
@@ -111,52 +106,52 @@ struct ContentView: View {
         withAnimation(
             Animation.easeOut(duration: hitBoxTime)
                 .delay(0)) {
-                    marioY = AnimationConst.Mario.maxY
+                    gameVM.marioY = AnimationConst.Mario.maxY
         }
         // 마리오 하강 시작
         withAnimation(
             Animation.easeIn(duration: marioStopTime - hitBoxTime)
                 .delay(hitBoxTime)) {
-                    marioY = AnimationConst.Mario.initY
+                    gameVM.marioY = AnimationConst.Mario.initY
         }
         // 마리오 착지
         DispatchQueue.main.asyncAfter(deadline: .now() + marioStopTime) {
-            marioAnimating = false
+            gameVM.marioAnimating = false
         }
         
         // 박스 점프 시작
         withAnimation(
             Animation.easeOut(duration: boxDropTime - hitBoxTime)
                 .delay(hitBoxTime)) {
-                    boxY = AnimationConst.Box.maxY
+                    gameVM.boxY = AnimationConst.Box.maxY
         }
         // 박스 하강 시작
         withAnimation(
             Animation.easeIn(duration: boxStopTime - boxDropTime)
                 .delay(boxDropTime)) {
-                    boxY = AnimationConst.Box.initY
+                    gameVM.boxY = AnimationConst.Box.initY
         }
         
         // 코인 카운트 증가
         DispatchQueue.main.asyncAfter(deadline: .now() + hitBoxTime) {
-            coinCnt += 1
+            gameVM.coinCnt += 1
         }
         // 코인 점프 시작
         withAnimation(
             Animation.easeOut(duration: coinDropTime - hitBoxTime)
                 .delay(hitBoxTime)) {
-                    coinY = AnimationConst.Coin.maxY
+                    gameVM.coinY = AnimationConst.Coin.maxY
         }
         // 코인 하강 시작
         withAnimation(
             Animation.easeIn(duration: coinStopTime - coinDropTime)
                 .delay(coinDropTime)) {
-                    coinY = AnimationConst.Coin.initY
+                    gameVM.coinY = AnimationConst.Coin.initY
         }
         
         // 최종 애니메이션 종료
         DispatchQueue.main.asyncAfter(deadline: .now() + coinStopTime) {
-            animating = false
+            gameVM.animating = false
         }
 
     }
