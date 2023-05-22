@@ -33,6 +33,16 @@ struct GameView: View {
                         .frame(width: 70, height: 70)
                         .offset(y: gameVM.coinY)
                     
+                    Image("mario-mushroom")
+                        .resizable()
+                        .scaledToFit()
+                        .frame(width: 70, height: 70)
+                        .offset(x: gameVM.mushroomX ,y: gameVM.mushroomY)
+                    
+                    Color(red: 107/255, green: 141/255, blue: 255/255)
+                        .frame(width: 70, height: 70)
+                        .offset(y: AnimationConst.Box.initY)
+                    
                     Image("mario-box")
                         .resizable()
                         .scaledToFit()

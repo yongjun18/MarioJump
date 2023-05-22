@@ -13,8 +13,11 @@ class GameViewModel: ObservableObject {
     @Published var marioY = AnimationConst.Mario.initY
     @Published var boxY = AnimationConst.Box.initY
     @Published var coinY = AnimationConst.Coin.initY
+    @Published var mushroomY = AnimationConst.Mushroom.initY
+    @Published var mushroomX = AnimationConst.Mushroom.initX
     @Published var marioJumping = false
     var boxActive = true
+    var mushroomReady = true
     
     // 마리오 점프 시키기
     func marioJump() {
@@ -59,11 +62,29 @@ class GameViewModel: ObservableObject {
                     boxY = AnimationConst.Box.initY
                 }
         
-        popCoin()
-        DispatchQueue.main.asyncAfter(
-            deadline: .now() + AnimationConst.Coin.upDuration + AnimationConst.Coin.downDuration) {
-                self.boxActive = true
-            }
+//        popCoin()
+//        DispatchQueue.main.asyncAfter(
+//            deadline: .now() + AnimationConst.Coin.upDuration + AnimationConst.Coin.downDuration) {
+//                self.boxActive = true
+//            }
+        if mushroomReady {
+            mushroomReady = false
+            
+            popMushroom()
+            DispatchQueue.main.asyncAfter(
+                deadline: .now() + AnimationConst.Mushroom.upDuration + AnimationConst.Mushroom.rightDuration) {
+                    self.boxActive = true
+                }
+            DispatchQueue.main.asyncAfter(
+                deadline: .now() + AnimationConst.Mushroom.lifeDuration) {
+                    self.mushroomReady = true
+                    self.mushroomX = AnimationConst.Mushroom.initX
+                    self.mushroomY = AnimationConst.Mushroom.initY
+                }
+        }
+        else {
+            boxActive = true
+        }
     }
     
     // 코인 당첨
@@ -81,6 +102,30 @@ class GameViewModel: ObservableObject {
             Animation.easeIn(duration: AnimationConst.Coin.downDuration)
                 .delay(AnimationConst.Coin.upDuration)) {
                     coinY = AnimationConst.Coin.initY
+                }
+    }
+    
+    // 버섯 당첨
+    func popMushroom() {
+        self.coinCnt += 10
+        
+        // 버섯 상승 시작
+        withAnimation(
+            Animation.linear(duration: AnimationConst.Mushroom.upDuration)
+                .delay(0)) {
+                    mushroomY = AnimationConst.Mushroom.maxY
+                }
+        // 버섯 아래 이동 시작
+        withAnimation(
+            Animation.easeIn(duration: AnimationConst.Mushroom.downDuration)
+                .delay(AnimationConst.Mushroom.upDuration + AnimationConst.Mushroom.rightDuration)) {
+                    mushroomY = AnimationConst.Mushroom.minY
+                }
+        // 버섯 오른쪽 이동 시작
+        withAnimation(
+            Animation.linear(duration: AnimationConst.Mushroom.lifeDuration - AnimationConst.Mushroom.upDuration)
+                .delay(AnimationConst.Mushroom.upDuration)) {
+                    mushroomX = AnimationConst.Mushroom.maxX
                 }
     }
 }
