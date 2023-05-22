@@ -22,9 +22,9 @@ struct AnimationConst {
     }
     struct Coin {
         public static let initY = -350.0
-        public static let maxY = -600.0
-        public static let upDuration = 0.20
-        public static let downDuration = 0.20
+        public static let maxY = -550.0
+        public static let upDuration = 0.17
+        public static let downDuration = 0.17
     }
     struct Mushroom {
         public static let initY = -350.0
