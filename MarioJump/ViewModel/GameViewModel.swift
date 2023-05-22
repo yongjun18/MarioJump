@@ -62,12 +62,8 @@ class GameViewModel: ObservableObject {
                     boxY = AnimationConst.Box.initY
                 }
         
-//        popCoin()
-//        DispatchQueue.main.asyncAfter(
-//            deadline: .now() + AnimationConst.Coin.upDuration + AnimationConst.Coin.downDuration) {
-//                self.boxActive = true
-//            }
-        if mushroomReady {
+        // 버섯이 대기 상태일 때, 10% 확률로 버섯 등장
+        if mushroomReady && Int.random(in: 0..<10) == 0 {
             mushroomReady = false
             
             popMushroom()
@@ -83,7 +79,11 @@ class GameViewModel: ObservableObject {
                 }
         }
         else {
-            boxActive = true
+            popCoin()
+            DispatchQueue.main.asyncAfter(
+                deadline: .now() + AnimationConst.Coin.upDuration + AnimationConst.Coin.downDuration) {
+                    self.boxActive = true
+                }
         }
     }
     
