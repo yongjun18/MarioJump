@@ -21,7 +21,7 @@ struct GameView: View {
                 .background(Color(red: 107/255, green: 141/255, blue: 255/255))
                 
                 ZStack {
-                    Image(gameVM.marioAnimating ? "mario-jump" : "mario")
+                    Image(gameVM.marioJumping ? "mario-jump" : "mario")
                         .resizable()
                         .scaledToFit()
                         .frame(width: 100, height: 100)
@@ -46,10 +46,9 @@ struct GameView: View {
             // 화면 전체에서 터치 이벤트 받기
             .contentShape(Rectangle())
             .onTapGesture {
-                if gameVM.animating == false {
-                    gameVM.marioAnimating = true
-                    gameVM.animating = true
-                    gameVM.animate()
+                if gameVM.marioJumping == false {
+                    gameVM.marioJumping = true
+                    gameVM.marioJump()
                 }
             }
             
